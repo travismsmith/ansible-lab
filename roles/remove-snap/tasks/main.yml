@@ -1,0 +1,37 @@
+---
+# tasks file for remove-snap
+
+- name: Populate service facts
+  service_facts:
+
+- name: Remove Existing Snaps
+  ansible.builtin.shell:
+    snap remove {{ item }}
+  loop:
+    - lxd
+    - core20
+    - snapd
+  when: ansible_facts.services["snapd.service"] is defined and ansible_facts.services["snapd.service"].state == "running"
+
+- name: Disable Snap services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop:
+    - snapd.service
+    - snapd.socket
+    - snapd.seeded.service
+  when: ansible_facts.services["snapd.service"] is defined
+
+- name: Recursively remove directory
+  ansible.builtin.file:
+    path: /var/cache/snapd/
+    state: absent
+
+- name: Remove "snapd" package
+  ansible.builtin.apt:
+    name: snapd
+    state: absent
+    purge: true
+    autoremove: true
