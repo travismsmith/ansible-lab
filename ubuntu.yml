@@ -1,5 +1,6 @@
 - name: Ubuntu
-  hosts: all
+  hosts: localhost
+  connection: local
   become: true
   roles:
     - role: remove-snap
