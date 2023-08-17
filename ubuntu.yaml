@@ -1,0 +1,10 @@
+- name: Ubuntu
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Create binary dir
+      ansible.builtin.file:
+        path: "/test"
+        state: directory
+        mode: '0755'
