@@ -3,7 +3,7 @@
   connection: local
   become: true
   roles:
-    - role: remove-snap
+    - role: remove_snap
   tasks:
     - name: Create binary dir
       ansible.builtin.file:
