@@ -7,12 +7,13 @@
 - name: Remove Existing Snaps
   ansible.builtin.command:
     snap remove {{ item }}
+  args: 
+    removes: /tmp/test
   loop:
     - lxd
     - core20
     - snapd
   when: ansible_facts.services["snapd.service"] is defined and ansible_facts.services["snapd.service"].state == "running"
-  removes: /tmp/test
 
 - name: Disable Snap services
   ansible.builtin.systemd:
