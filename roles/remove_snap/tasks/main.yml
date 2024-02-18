@@ -7,7 +7,7 @@
 - name: Remove Existing Snaps
   ansible.builtin.command:
     snap remove {{ item }}
-  args: 
+  args:
     removes: /tmp/test
   loop:
     - lxd
