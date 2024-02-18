@@ -1,4 +1,5 @@
 - name: Ubuntu
+  hosts: all
   become: true
   roles:
     - role: remove_snap
