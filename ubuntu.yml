@@ -7,5 +7,5 @@
     - name: Create binary dir
       ansible.builtin.file:
         path: "/test"
-        state: directory
-        mode: '0755'
+        state: absent
+          # mode: '0755'
