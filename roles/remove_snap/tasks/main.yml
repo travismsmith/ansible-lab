@@ -2,10 +2,10 @@
 # tasks file for remove-snap
 
 - name: Populate service facts
-  service_facts:
+  ansible.builtin.service_facts:
 
 - name: Remove Existing Snaps
-  ansible.builtin.shell:
+  ansible.builtin.command:
     snap remove {{ item }}
   loop:
     - lxd
